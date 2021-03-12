@@ -1,4 +1,5 @@
 import ICreateCourseDTO from '@modules/courses/dtos/ICreateCourseDTO';
+import IUpdateCourseDTO from '@modules/courses/dtos/IUpdateCourseDTO';
 import ICourseRepository from '@modules/courses/repositories/ICourseRepository';
 import { getRepository, Repository } from 'typeorm';
 import Course from '../entities/Course';
@@ -27,7 +28,7 @@ export default class CourseRepository implements ICourseRepository {
     return this.ormRepo.save(course);
   }
 
-  public async update(course: Course): Promise<Course> {
+  public async update(course: IUpdateCourseDTO): Promise<Course> {
     return this.ormRepo.save(course);
   }
 }

@@ -16,4 +16,11 @@ courseRouter.post(
   courseController.create,
 );
 
+courseRouter.put(
+  '/:id',
+  AdminAuth,
+  upload.single('image'),
+  courseController.update,
+);
+
 export default courseRouter;
