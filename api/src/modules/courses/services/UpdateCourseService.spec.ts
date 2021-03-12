@@ -43,19 +43,19 @@ describe('UpdateCourseService', () => {
 
     await expect(
       updateCourseService.execute({
-        id: 'inexistent ID',
-        name: 'inexistent course',
-        image: 'inexistent image',
+        id: 'unexistent ID',
+        name: 'unexistent course',
+        image: 'unexistent image',
       }),
     ).rejects.toBeInstanceOf(AppError);
     expect(
       updateCourseService.execute({
-        id: 'inexistent_ID',
-        name: 'inexistent course',
+        id: 'unexistent_ID',
+        name: 'unexistent course',
       }),
     ).rejects.toBeInstanceOf(AppError);
     expect(spyDeleteTmpFile).toHaveBeenCalledTimes(1);
-    expect(spyDeleteTmpFile).toHaveBeenCalledWith('inexistent image');
+    expect(spyDeleteTmpFile).toHaveBeenCalledWith('unexistent image');
   });
 
   it('should delete old image from db when update', async () => {

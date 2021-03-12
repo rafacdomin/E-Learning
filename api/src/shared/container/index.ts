@@ -8,6 +8,9 @@ import AdminsRepository from '@modules/admins/infra/typeorm/repositories/AdminsR
 import ICourseRepository from '@modules/courses/repositories/ICourseRepository';
 import CourseRepository from '@modules/courses/infra/typeorm/repositories/CourseRepository';
 
+import ILessonRepository from '@modules/lessons/repositories/ILessonRepository';
+import LessonRepository from '@modules/lessons/infra/typeorm/repositories/LessonRepository';
+
 container.registerSingleton<IAdminsRepository>(
   'AdminsRepository',
   AdminsRepository,
@@ -16,4 +19,9 @@ container.registerSingleton<IAdminsRepository>(
 container.registerSingleton<ICourseRepository>(
   'CourseRepository',
   CourseRepository,
+);
+
+container.registerSingleton<ILessonRepository>(
+  'LessonsRepository',
+  LessonRepository,
 );
