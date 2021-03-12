@@ -1,5 +1,6 @@
 import CreateCourseService from '@modules/courses/services/CreateCourseService';
 import UpdateCourseService from '@modules/courses/services/UpdateCourseService';
+import ListCourseService from '@modules/courses/services/ListCourseService';
 import { classToClass } from 'class-transformer';
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
@@ -31,5 +32,13 @@ export default class CourseController {
     });
 
     return res.json(classToClass(course));
+  }
+
+  public async list(req: Request, res: Response): Promise<Response> {
+    const listCourseService = container.resolve(ListCourseService);
+
+    const courses = await listCourseService.execute();
+
+    return res.json(classToClass(courses));
   }
 }

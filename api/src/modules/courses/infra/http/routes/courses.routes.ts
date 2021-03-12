@@ -23,4 +23,6 @@ courseRouter.put(
   courseController.update,
 );
 
+courseRouter.get('/', courseController.list);
+
 export default courseRouter;

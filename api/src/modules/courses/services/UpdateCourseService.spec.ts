@@ -48,6 +48,13 @@ describe('UpdateCourseService', () => {
         image: 'inexistent image',
       }),
     ).rejects.toBeInstanceOf(AppError);
+    expect(
+      updateCourseService.execute({
+        id: 'inexistent_ID',
+        name: 'inexistent course',
+      }),
+    ).rejects.toBeInstanceOf(AppError);
+    expect(spyDeleteTmpFile).toHaveBeenCalledTimes(1);
     expect(spyDeleteTmpFile).toHaveBeenCalledWith('inexistent image');
   });
 
