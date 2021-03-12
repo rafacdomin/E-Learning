@@ -20,8 +20,11 @@ class Course {
   @Column()
   image: string;
 
-  @OneToMany(() => Lesson, lesson => lesson.course)
-  lesson: Lesson;
+  @OneToMany(() => Lesson, lesson => lesson.course, {
+    eager: true,
+    cascade: true,
+  })
+  lessons: Lesson[];
 
   @CreateDateColumn()
   created_at: Date;

@@ -20,12 +20,12 @@ class Lesson {
   @Column()
   duration: number;
 
-  @ManyToOne(() => Course, { eager: true })
-  @JoinColumn({ name: 'course_id' })
-  course: Course;
-
   @Column()
   course_id: string;
+
+  @ManyToOne(() => Course)
+  @JoinColumn({ name: 'course_id' })
+  course: Course;
 
   @Column()
   description: string;
