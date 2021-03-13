@@ -12,6 +12,7 @@ export default class CourseController {
     const createCourseService = container.resolve(CreateCourseService);
 
     const course = await createCourseService.execute({
+      owner_id: req.admin.id,
       name,
       image: req.file.filename,
     });
@@ -28,6 +29,7 @@ export default class CourseController {
     const course = await updateCourseService.execute({
       id,
       name,
+      admin_id: req.admin.id,
       image: req.file.filename,
     });
 

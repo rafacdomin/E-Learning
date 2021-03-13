@@ -25,6 +25,6 @@ export default class AdminsRepository implements IAdminsRepository {
   }
 
   public async findById(id: string): Promise<Admin | undefined> {
-    return this.ormRepository.findOne(id);
+    return this.ormRepository.findOne({ where: { id } });
   }
 }

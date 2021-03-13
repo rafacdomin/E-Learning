@@ -1,3 +1,4 @@
+import Admin from '@modules/admins/infra/typeorm/entities/Admin';
 import Lesson from '@modules/lessons/infra/typeorm/entities/Lesson';
 import { Expose } from 'class-transformer';
 import {
@@ -7,6 +8,8 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   OneToMany,
+  ManyToOne,
+  JoinColumn,
 } from 'typeorm';
 
 @Entity('courses')
@@ -25,6 +28,13 @@ class Course {
     cascade: true,
   })
   lessons: Lesson[];
+
+  @Column()
+  owner_id: string;
+
+  @ManyToOne(() => Admin)
+  @JoinColumn({ name: 'owner_id' })
+  owner: Admin;
 
   @CreateDateColumn()
   created_at: Date;

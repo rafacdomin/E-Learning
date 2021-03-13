@@ -14,7 +14,7 @@ export default class CourseRepository implements ICourseRepository {
     return this.ormRepo.findOne({ where: { name } });
   }
 
-  findById(id: string): Promise<Course | undefined> {
+  public async findById(id: string): Promise<Course | undefined> {
     return this.ormRepo.findOne({ where: { id } });
   }
 

@@ -1,9 +1,11 @@
+import Course from '@modules/courses/infra/typeorm/entities/Course';
 import {
   Entity,
   Column,
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  OneToMany,
 } from 'typeorm';
 
 import { Exclude } from 'class-transformer';
@@ -18,6 +20,15 @@ class Admin {
 
   @Column()
   email: string;
+
+  @Column()
+  role?: string;
+
+  @OneToMany(() => Course, course => course.owner, {
+    eager: true,
+    cascade: true,
+  })
+  courses: Course[];
 
   @Column()
   @Exclude()

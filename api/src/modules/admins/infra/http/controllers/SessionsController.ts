@@ -9,11 +9,15 @@ export default class SessionsController {
 
     const authAdmin = container.resolve(AuthAdminService);
 
-    const admin = await authAdmin.execute({
+    const { admin, token } = await authAdmin.execute({
       email,
       password,
     });
 
-    return res.json(classToClass(admin));
+    req.admin = {
+      id: admin.id,
+    };
+
+    return res.json({ admin: classToClass(admin), token });
   }
 }

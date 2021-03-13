@@ -19,15 +19,15 @@ export default class LessonRepository implements ILessonRepository {
     return this.ormRepo.save(lesson);
   }
 
-  find(): Promise<Lesson[]> {
+  public async find(): Promise<Lesson[]> {
     return this.ormRepo.find();
   }
 
-  findById(id: string): Promise<Lesson | undefined> {
+  public async findById(id: string): Promise<Lesson | undefined> {
     return this.ormRepo.findOne({ where: { id } });
   }
 
-  findByCourse(course_id: string): Promise<Lesson[]> {
+  public async findByCourse(course_id: string): Promise<Lesson[]> {
     return this.ormRepo.find({ where: { course_id } });
   }
 }

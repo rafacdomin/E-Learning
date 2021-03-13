@@ -10,7 +10,7 @@
     "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules src/shared/infra/http/server.ts",
     "start": "ts-node src/shared/infra/http/server.ts",
     "test": "jest",
-    "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js"
+    "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli.js"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
@@ -45,6 +45,7 @@
     "multer": "^1.4.2",
     "pg": "^8.5.1",
     "reflect-metadata": "^0.1.13",
+    "tsconfig-paths": "^3.9.0",
     "tsyringe": "^4.4.0",
     "typeorm": "^0.2.31"
   }
