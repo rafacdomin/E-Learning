@@ -31,7 +31,7 @@ export default class UpdateCourseService {
       throw new AppError('Course does not exists');
     }
 
-    if (!admin || (course.owner_id !== admin.id && admin.role !== 'master')) {
+    if (!admin || course.owner_id !== admin.id) {
       if (data.image) {
         await this.storageProvider.deleteTmpFile(data.image);
       }

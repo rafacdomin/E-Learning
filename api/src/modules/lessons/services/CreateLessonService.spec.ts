@@ -3,12 +3,18 @@ import FakeStorageProvider from '@shared/container/providers/storageProvider/fak
 import CreateCourseService from '@modules/courses/services/CreateCourseService';
 import FakeCourseRepository from '@modules/courses/repositories/fakes/FakeCourseRepository';
 import AppError from '@shared/errors/AppError';
+import FakeAdminsRepository from '@modules/admins/repositories/fakes/FakeAdminsRepository';
+import FakeHashProvider from '@modules/admins/providers/hashProvider/fakes/FakeHashProvider';
+import CreateAdminService from '@modules/admins/services/CreateAdminService';
 import FakeLessonRepository from '../repositories/fakes/FakeLessonRepository';
 import CreateLessonService from './CreateLessonService';
 
 let fakeCourseRepository: FakeCourseRepository;
 let fakeLessonRepository: FakeLessonRepository;
 let fakeStorageProvider: FakeStorageProvider;
+let fakeAdminsRepository: FakeAdminsRepository;
+let fakeHashProvider: FakeHashProvider;
+let createAdminService: CreateAdminService;
 let createCourseService: CreateCourseService;
 let createLessonService: CreateLessonService;
 
@@ -17,8 +23,15 @@ describe('CreateLessonService', () => {
     fakeCourseRepository = new FakeCourseRepository();
     fakeLessonRepository = new FakeLessonRepository();
     fakeStorageProvider = new FakeStorageProvider();
+    fakeAdminsRepository = new FakeAdminsRepository();
+    fakeHashProvider = new FakeHashProvider();
+    createAdminService = new CreateAdminService(
+      fakeAdminsRepository,
+      fakeHashProvider,
+    );
     createCourseService = new CreateCourseService(
       fakeCourseRepository,
+      fakeAdminsRepository,
       fakeStorageProvider,
     );
     createLessonService = new CreateLessonService(
@@ -28,7 +41,13 @@ describe('CreateLessonService', () => {
   });
 
   it('should be able to create a new Lesson', async () => {
+    const admin = await createAdminService.execute({
+      name: 'admin',
+      email: 'admin@email.com',
+      password: 'password',
+    });
     const newCourse = await createCourseService.execute({
+      owner_id: admin.id,
       name: 'new course',
       image: 'image_path',
     });
