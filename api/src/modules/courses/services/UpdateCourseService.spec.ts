@@ -72,8 +72,8 @@ describe('UpdateCourseService', () => {
       image: 'new image name',
     });
 
-    expect(spyDeleteFile).toHaveBeenCalledWith(newCourse.image);
-    expect(spySaveFile).toHaveBeenCalledWith(updatedCourse.image);
+    expect(spyDeleteFile).toHaveBeenCalledWith('image_name');
+    expect(spySaveFile).toHaveBeenCalledWith('new image name');
     expect(updatedCourse.image).toEqual('new image name');
   });
 });

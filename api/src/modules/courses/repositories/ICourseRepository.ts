@@ -1,5 +1,4 @@
 import ICreateCourseDTO from '../dtos/ICreateCourseDTO';
-import IUpdateCourseDTO from '../dtos/IUpdateCourseDTO';
 import Course from '../infra/typeorm/entities/Course';
 
 export default interface ICourseRepository {
@@ -7,5 +6,5 @@ export default interface ICourseRepository {
   findByName(name: string): Promise<Course | undefined>;
   findById(id: string): Promise<Course | undefined>;
   create(data: ICreateCourseDTO): Promise<Course>;
-  update(course: IUpdateCourseDTO): Promise<Course>;
+  update(course: Course): Promise<Course>;
 }

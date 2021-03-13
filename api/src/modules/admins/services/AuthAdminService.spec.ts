@@ -1,8 +1,8 @@
 import AppError from '@shared/errors/AppError';
 import FakeHashProvider from '../providers/hashProvider/fakes/FakeHashProvider';
 import FakeAdminsRepository from '../repositories/fakes/FakeAdminsRepository';
-import AuthAdminService from './authAdminService';
-import CreateAdminService from './createAdminService';
+import AuthAdminService from './AuthAdminService';
+import CreateAdminService from './CreateAdminService';
 
 let fakeAdminsRepository: FakeAdminsRepository;
 let fakeHashProvider: FakeHashProvider;

@@ -15,21 +15,24 @@ export default class UpdateCourseService {
     private storageProvider: IStorageProvider,
   ) {}
 
-  public async execute(course: IUpdateCourseDTO): Promise<Course> {
-    const courseExists = await this.courseRepository.findById(course.id);
+  public async execute(data: IUpdateCourseDTO): Promise<Course> {
+    const course = await this.courseRepository.findById(data.id);
 
-    if (!courseExists) {
-      if (course.image) {
-        await this.storageProvider.deleteTmpFile(course.image);
+    if (!course) {
+      if (data.image) {
+        await this.storageProvider.deleteTmpFile(data.image);
       }
 
       throw new AppError('Course does not exists');
     }
 
-    if (course.image) {
-      await this.storageProvider.deleteFile(courseExists.image);
-      await this.storageProvider.saveFile(course.image);
+    if (data.image) {
+      await this.storageProvider.deleteFile(course.image);
+      await this.storageProvider.saveFile(data.image);
+      course.image = data.image;
     }
+
+    Object.assign(course, data);
 
     return this.courseRepository.update(course);
   }

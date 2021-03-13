@@ -1,4 +1,4 @@
-import CreateAdminService from '@modules/admins/services/createAdminService';
+import CreateAdminService from '@modules/admins/services/CreateAdminService';
 import { classToClass } from 'class-transformer';
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';

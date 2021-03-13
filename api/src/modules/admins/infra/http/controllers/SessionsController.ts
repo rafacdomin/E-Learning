@@ -1,4 +1,4 @@
-import AuthAdminService from '@modules/admins/services/authAdminService';
+import AuthAdminService from '@modules/admins/services/AuthAdminService';
 import { classToClass } from 'class-transformer';
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';

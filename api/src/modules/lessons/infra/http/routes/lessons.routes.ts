@@ -7,4 +7,6 @@ const lessonController = new LessonController();
 
 lessonRouter.post('/', AdminAuth, lessonController.create);
 
+lessonRouter.put('/:id', AdminAuth, lessonController.update);
+
 export default lessonRouter;
