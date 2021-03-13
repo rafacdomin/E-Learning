@@ -31,7 +31,7 @@ export default class FakeLessonRepository implements ILessonRepository {
 
   public async findByCourse(course_id: string): Promise<Lesson[]> {
     return this.lessons.filter(
-      findLesson => findLesson.course_id !== course_id,
+      findLesson => findLesson.course_id === course_id,
     );
   }
 }

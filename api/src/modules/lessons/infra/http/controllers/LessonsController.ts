@@ -1,4 +1,5 @@
 import CreateLessonService from '@modules/lessons/services/CreateLessonService';
+import ListLessonService from '@modules/lessons/services/ListLessonsService';
 import UpdateLessonService from '@modules/lessons/services/UpdateLessonService';
 import { classToClass } from 'class-transformer';
 import { Request, Response } from 'express';
@@ -37,5 +38,15 @@ export default class CourseController {
     });
 
     return res.json(classToClass(lesson));
+  }
+
+  public async list(req: Request, res: Response): Promise<Response> {
+    const { course_id } = req.params;
+
+    const listLessonsService = container.resolve(ListLessonService);
+
+    const lessons = await listLessonsService.execute(course_id);
+
+    return res.json(classToClass(lessons));
   }
 }

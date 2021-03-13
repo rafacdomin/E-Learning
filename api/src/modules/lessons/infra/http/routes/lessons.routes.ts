@@ -1,12 +1,12 @@
 import AdminAuth from '@modules/admins/infra/http/middlewares/AdminAuth';
 import { Router } from 'express';
-import LessonController from '../controllers/LessonController';
+import LessonsController from '../controllers/LessonsController';
 
 const lessonRouter = Router();
-const lessonController = new LessonController();
+const lessonsController = new LessonsController();
 
-lessonRouter.post('/', AdminAuth, lessonController.create);
+lessonRouter.post('/', AdminAuth, lessonsController.create);
 
-lessonRouter.put('/:id', AdminAuth, lessonController.update);
+lessonRouter.put('/:id', AdminAuth, lessonsController.update);
 
 export default lessonRouter;
