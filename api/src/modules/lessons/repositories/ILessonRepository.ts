@@ -7,4 +7,5 @@ export default interface ILessonRepository {
   find(): Promise<Lesson[]>;
   findById(id: string): Promise<Lesson | undefined>;
   findByCourse(course_id: string): Promise<Lesson[]>;
+  delete(lesson: Lesson): Promise<void>;
 }

@@ -31,4 +31,10 @@ courseRouter.get('/', courseController.list);
 
 courseRouter.get('/:course_id/lessons', lessonsController.list);
 
+courseRouter.delete(
+  '/:course_id/lessons/:id',
+  AdminAuth,
+  lessonsController.delete,
+);
+
 export default courseRouter;

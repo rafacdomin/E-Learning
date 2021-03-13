@@ -5,6 +5,11 @@ import ILessonRepository from '../ILessonRepository';
 export default class FakeLessonRepository implements ILessonRepository {
   private lessons: Lesson[] = [];
 
+  public async delete(lesson: Lesson): Promise<void> {
+    const Index = this.lessons.findIndex(item => item.id === lesson.id);
+    this.lessons.splice(Index, 1);
+  }
+
   public async create(data: ICreateLessonDTO): Promise<Lesson> {
     const lesson = new Lesson();
     lesson.id = this.lessons.length.toString();

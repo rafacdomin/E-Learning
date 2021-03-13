@@ -10,6 +10,10 @@ export default class LessonRepository implements ILessonRepository {
     this.ormRepo = getRepository(Lesson);
   }
 
+  public async delete(lesson: Lesson): Promise<void> {
+    await this.ormRepo.remove(lesson);
+  }
+
   public async create(data: ICreateLessonDTO): Promise<Lesson> {
     const lesson = this.ormRepo.create(data);
     return this.ormRepo.save(lesson);

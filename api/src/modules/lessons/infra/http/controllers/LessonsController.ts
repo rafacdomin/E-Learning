@@ -1,4 +1,5 @@
 import CreateLessonService from '@modules/lessons/services/CreateLessonService';
+import DeleteLessonService from '@modules/lessons/services/DeleteLessonService';
 import ListLessonService from '@modules/lessons/services/ListLessonsService';
 import UpdateLessonService from '@modules/lessons/services/UpdateLessonService';
 import { classToClass } from 'class-transformer';
@@ -46,6 +47,20 @@ export default class CourseController {
     const listLessonsService = container.resolve(ListLessonService);
 
     const lessons = await listLessonsService.execute(course_id);
+
+    return res.json(classToClass(lessons));
+  }
+
+  public async delete(req: Request, res: Response): Promise<Response> {
+    const { course_id, id } = req.params;
+
+    const deleteLessonsService = container.resolve(DeleteLessonService);
+
+    const lessons = await deleteLessonsService.execute({
+      course_id,
+      id,
+      owner_id: req.admin.id,
+    });
 
     return res.json(classToClass(lessons));
   }
