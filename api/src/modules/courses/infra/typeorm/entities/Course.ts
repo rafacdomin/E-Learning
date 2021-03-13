@@ -25,14 +25,13 @@ class Course {
 
   @OneToMany(() => Lesson, lesson => lesson.course, {
     eager: true,
-    cascade: true,
   })
   lessons: Lesson[];
 
   @Column()
   owner_id: string;
 
-  @ManyToOne(() => Admin)
+  @ManyToOne(() => Admin, { eager: true })
   @JoinColumn({ name: 'owner_id' })
   owner: Admin;
 

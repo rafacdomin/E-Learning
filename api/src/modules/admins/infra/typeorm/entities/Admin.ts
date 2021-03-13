@@ -24,10 +24,7 @@ class Admin {
   @Column()
   role?: string;
 
-  @OneToMany(() => Course, course => course.owner, {
-    eager: true,
-    cascade: true,
-  })
+  @OneToMany(() => Course, course => course.owner)
   courses: Course[];
 
   @Column()
