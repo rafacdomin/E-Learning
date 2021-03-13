@@ -25,6 +25,8 @@ courseRouter.put(
   courseController.update,
 );
 
+courseRouter.delete('/:id', AdminAuth, courseController.delete);
+
 courseRouter.get('/', courseController.list);
 
 courseRouter.get('/:course_id/lessons', lessonsController.list);

@@ -7,4 +7,5 @@ export default interface ICourseRepository {
   findById(id: string): Promise<Course | undefined>;
   create(data: ICreateCourseDTO): Promise<Course>;
   update(course: Course): Promise<Course>;
+  delete(course: Course): Promise<void>;
 }

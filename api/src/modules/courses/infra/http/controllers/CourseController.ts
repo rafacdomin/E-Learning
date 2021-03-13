@@ -4,6 +4,7 @@ import ListCourseService from '@modules/courses/services/ListCourseService';
 import { classToClass } from 'class-transformer';
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
+import DeleteCourseService from '@modules/courses/services/DeleteCourseService';
 
 export default class CourseController {
   public async create(req: Request, res: Response): Promise<Response> {
@@ -42,5 +43,18 @@ export default class CourseController {
     const courses = await listCourseService.execute();
 
     return res.json(classToClass(courses));
+  }
+
+  public async delete(req: Request, res: Response): Promise<Response> {
+    const { id } = req.params;
+
+    const deleteCourseService = container.resolve(DeleteCourseService);
+
+    await deleteCourseService.execute({
+      id,
+      owner_id: req.admin.id,
+    });
+
+    return res.send();
   }
 }
