@@ -127,7 +127,44 @@ describe('UpdateCourseService', () => {
         admin_id: 'wrong_id',
         id: newCourse.id,
         name: 'new name',
+        image: 'new image',
       }),
     ).rejects.toBeInstanceOf(AppError);
+    await expect(
+      updateCourseService.execute({
+        admin_id: 'wrong_id',
+        id: newCourse.id,
+        name: 'new name',
+      }),
+    ).rejects.toBeInstanceOf(AppError);
+  });
+
+  it('should be able to update any course if you are master', async () => {
+    const master = await createAdminService.execute({
+      name: 'master',
+      email: 'master@admin.com',
+      password: 'password',
+      role: 'master',
+    });
+
+    const admin = await createAdminService.execute({
+      name: 'admin',
+      email: 'admin@email.com',
+      password: 'password',
+    });
+
+    const newCourse = await createCourseService.execute({
+      owner_id: admin.id,
+      name: 'new course',
+      image: 'image_name',
+    });
+
+    const updatedCourse = await updateCourseService.execute({
+      admin_id: master.id,
+      id: newCourse.id,
+      name: 'new name',
+    });
+
+    expect(updatedCourse.name).toEqual('new name');
   });
 });

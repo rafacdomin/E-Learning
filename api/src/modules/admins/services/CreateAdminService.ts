@@ -3,12 +3,7 @@ import AppError from '@shared/errors/AppError';
 import Admin from '../infra/typeorm/entities/Admin';
 import IHashProvider from '../providers/hashProvider/models/IHashProvider';
 import IAdminsRepository from '../repositories/IAdminsRepository';
-
-interface IRequestDTO {
-  name: string;
-  password: string;
-  email: string;
-}
+import ICreateAdminDTO from '../dtos/ICreateAdminDTO';
 
 @injectable()
 export default class CreateAdminService {
@@ -20,7 +15,12 @@ export default class CreateAdminService {
     private hashProvider: IHashProvider,
   ) {}
 
-  public async execute({ name, email, password }: IRequestDTO): Promise<Admin> {
+  public async execute({
+    name,
+    email,
+    password,
+    role = '',
+  }: ICreateAdminDTO): Promise<Admin> {
     const adminExists = await this.adminsRepo.findByEmail(email);
 
     if (adminExists) {
@@ -33,6 +33,7 @@ export default class CreateAdminService {
       name,
       email,
       password: passwordHash,
+      role,
     });
 
     return admin;
