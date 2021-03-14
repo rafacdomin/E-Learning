@@ -24,7 +24,7 @@ userRoutes.post(
   '/sessions',
   celebrate({
     [Segments.BODY]: {
-      email: Joi.string().required(),
+      email: Joi.string().email().required(),
       password: Joi.string().required(),
     },
   }),

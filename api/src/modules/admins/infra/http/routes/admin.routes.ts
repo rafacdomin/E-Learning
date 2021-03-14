@@ -1,7 +1,6 @@
 import { Router } from 'express';
 import { celebrate, Segments, Joi } from 'celebrate';
 
-// import ensureAuth from '../middlewares/ensureAuth';
 import AdminsController from '../controllers/AdminsController';
 import SessionsController from '../controllers/SessionsController';
 
@@ -25,7 +24,7 @@ adminRoutes.post(
   '/sessions',
   celebrate({
     [Segments.BODY]: {
-      email: Joi.string().required(),
+      email: Joi.string().email().required(),
       password: Joi.string().required(),
     },
   }),

@@ -31,7 +31,7 @@ export default class CourseController {
       id,
       name,
       admin_id: req.admin.id,
-      image: req.file.filename,
+      image: req.file?.filename,
     });
 
     return res.json(classToClass(course));
