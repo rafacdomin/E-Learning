@@ -10,8 +10,10 @@ services:
       - "3333:3333"
     volumes:
       - .:/usr/app
-    environment:
+    env_file:
       - .env
+    environment:
+      PG_HOST: postgres
   postgres:
     restart: on-failure
     image: postgres:latest
